@@ -88,36 +88,46 @@ class contactoController extends Controller
 
         $telefonos = $request->telefono;
 
-        for($i=0;$i<count($telefonos);$i++){
+        if($telefonos){
 
-            Telefono::create([
-                'id_contacto' => $contacto->id,
-                'telefono' => $telefonos[$i]['numero'], 
-            ]);
-            
-        } 
+            for($i=0;$i<count($telefonos);$i++){
+
+                Telefono::create([
+                    'id_contacto' => $contacto->id,
+                    'telefono' => $telefonos[$i]['numero'], 
+                ]);
+                
+            } 
+        }
+        
 
         $emails = $request->emails;
 
-        for($i=0;$i<count($emails);$i++){
+        if($emails){
 
-            Email::create([
-                'id_contacto' => $contacto->id,
-                'email' => $emails[$i]['email'], 
-            ]);
-            
-        } 
+            for($i=0;$i<count($emails);$i++){
+
+                Email::create([
+                    'id_contacto' => $contacto->id,
+                    'email' => $emails[$i]['email'], 
+                ]);
+                
+            } 
+        }
 
         $direcciones = $request->direcciones;
 
-        for($i=0;$i<count($direcciones);$i++){
+        if($direcciones){
 
-            Direccion::create([
-                'id_contacto' => $contacto->id,
-                'direccion' => $direcciones[$i]['direccion'], 
-            ]);
-            
-        } 
+            for($i=0;$i<count($direcciones);$i++){
+
+                Direccion::create([
+                    'id_contacto' => $contacto->id,
+                    'direccion' => $direcciones[$i]['direccion'], 
+                ]);
+                
+            } 
+        }
 
 
         $data = [
@@ -163,43 +173,55 @@ class contactoController extends Controller
         $contacto->save();
 
   
-        Telefono::where('id_contacto', $id_contacto)->delete();
+        
         $telefonos = $request->telefono;
 
-        for($i=0;$i<count($telefonos);$i++){
+        if($telefonos){
+            //Telefono::where('id_contacto', $id_contacto)->delete();
+            for($i=0;$i<count($telefonos);$i++){
 
-            Telefono::create([
-                'id_contacto' => $contacto->id,
-                'telefono' => $telefonos[$i]['numero'], 
-            ]);
-            
-        } 
+                Telefono::create([
+                    'id_contacto' => $contacto->id,
+                    'telefono' => $telefonos[$i]['numero'], 
+                ]);
+                
+            } 
+        }
+        
 
-        Email::where('id_contacto', $id_contacto)->delete();
+        
 
         $emails = $request->emails;
 
-        for($i=0;$i<count($emails);$i++){
+        if($emails ){
+            //Email::where('id_contacto', $id_contacto)->delete();
+            for($i=0;$i<count($emails);$i++){
 
-            Email::create([
-                'id_contacto' => $contacto->id,
-                'email' => $emails[$i]['email'], 
-            ]);
-            
-        } 
+                Email::create([
+                    'id_contacto' => $contacto->id,
+                    'email' => $emails[$i]['email'], 
+                ]);
+                
+            } 
+        }
 
-        Direccion::where('id_contacto', $id_contacto)->delete();
+        
+
+        
 
         $direcciones = $request->direcciones;
 
-        for($i=0;$i<count($direcciones);$i++){
+        if($direcciones){
+            //Direccion::where('id_contacto', $id_contacto)->delete();
+            for($i=0;$i<count($direcciones);$i++){
 
-            Direccion::create([
-                'id_contacto' => $contacto->id,
-                'direccion' => $direcciones[$i]['direccion'], 
-            ]);
-            
-        } 
+                Direccion::create([
+                    'id_contacto' => $contacto->id,
+                    'direccion' => $direcciones[$i]['direccion'], 
+                ]);
+                
+            } 
+        }
 
         $data = [
             'message'=>'Contacto editado',
